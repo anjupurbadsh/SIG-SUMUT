@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIG Wisata Sumatera Utara</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-left">
+    <img src="assets/logo.jpeg" class="logo-img">
+    <div class="logo">SIG SUMUT</div>
+    </div>
+
+    <nav class="nav-center">
+      <a href="#">Destinasi</a>
+      <a href="#" class="active">Promo</a>
+      <a href="#">Kontak</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="btn-login">Masuk</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Pemetaan Wisata Alam Sumatera Utara</h2>
+    <p>Temukan lokasi wisata alam terbaik berbasis Sistem Informasi Geografis</p>
+
+    <div class="destinations">
+
+      <!-- SEARCH -->
+      <div class="search">
+        <input 
+          type="text" 
+          id="searchInput" 
+          onkeyup="cariWisata()" 
+          placeholder="Cari lokasi wisata..."
+        >
+        <button class="btn" onclick="cariWisata()">Cari</button>
+      </div>
+
+      <!-- HASIL SEARCH -->
+      <div id="hasilPencarian"></div>
+
+      <!-- CARD -->
+      <div class="card">
+        <img src="assets/danau-toba.jpg" alt="Danau Toba">
+        <div class="label">Danau Toba</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/bukit-lawang.jpg" alt="Bukit Lawang">
+        <div class="label">Bukit Lawang</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/sipiso-piso.jpg" alt="Sipiso-piso">
+        <div class="label">Sipiso-piso</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/pulau-nias.jpg" alt="Pulau Nias">
+        <div class="label">Pulau Nias</div>
+        </div>
+
+        <div class="card">
+            <img src="assets/Pantai-Sorake.jpg" alt="Pantai Sorake">
+            <div class="label">Pantai Sorake</div>
+        </div>
+
+        <div class="card">
+            <img src="assets/danau-linting.jpg" alt="Danau Linting">
+            <div class="label">Danau Linting</div>
+        </div>
+
+        <div class="card">
+            <img src="assets/danau-siasis.jpg" alt="Danau Siais">
+            <div class="label">Danau Siais</div>
+        </div>
+
+        <div class="card">
+            <img src="assets/bukit-sibeabea.jpg" alt="Bukit Sibeabea">
+            <div class="label">Bukit Sibea-bea</div>
+        </div>
+
+    </div>
+  </section>
+
+  <!-- MAP FLOATING -->
+  <div id="mapPopup" class="map-popup">
+    <div class="map-content">
+      <span id="closeMap">&times;</span>
+      <iframe id="mapFrame" src="" frameborder="0"></iframe>
+      <a id="mapLink" target="_blank">Buka di Google Maps</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 SIG Wisata Sumatera Utara</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
