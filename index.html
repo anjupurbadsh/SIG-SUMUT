@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIG Wisata Sumatera Utara</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- LEAFLET -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- ROUTING -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+</head>
+
+<body>
+
+<div id="loadingScreen">
+
+  <div class="loader"></div>
+
+  <h2>
+    Memuat SIG SUMUT...
+  </h2>
+
+</div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+
+    <div class="nav-left">
+      <img src="assets/logo.jpeg" class="logo-img">
+      <div class="logo">SIG SUMUT</div>
+    </div>
+
+    <nav class="nav-center">
+      <a href="#destinasi">Destinasi</a>
+      <a href="#promo">Promo</a>
+      <a href="#kontak">Kontak</a>
+      <a href="#penelitian">Penelitian</a>
+    </nav>
+
+    <div class="nav-right">
+
+      <button class="btn-login" id="btnLogin">
+      Masuk
+      </button>
+
+    </div>
+
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <h2>Pemetaan Wisata Alam Sumatera Utara</h2>
+
+    <p>
+      Temukan lokasi wisata alam terbaik berbasis Sistem Informasi Geografis
+    </p>
+
+    <div class="stats-container">
+
+  <div class="stat-card">
+    <h3 id="totalWisata">8</h3>
+    <p>Total Wisata</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="totalDanau">3</h3>
+    <p>Danau</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="totalBukit">2</h3>
+    <p>Bukit</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="totalPantai">1</h3>
+    <p>Pantai</p>
+  </div>
+
+</div>
+
+    <!-- SEARCH -->
+    <div class="search">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Cari lokasi wisata..."
+        onkeyup="cariWisata()"
+      >
+
+      <button class="btn" onclick="cariWisata()">
+        Cari
+      </button>
+
+    </div>
+
+    <div class="filter-container">
+
+<select id="kategoriFilter">
+
+<option value="Semua">Semua</option>
+<option value="Danau">Danau</option>
+<option value="Bukit">Bukit</option>
+<option value="Pantai">Pantai</option>
+<option value="Pulau">Pulau</option>
+<option value="Air Terjun">Air Terjun</option>
+
+</select>
+
+</div>
+
+    <!-- HASIL -->
+    <div id="hasilPencarian"></div>
+
+    <!-- DESTINATIONS -->
+    <div class="destinations" id="destinasi">
+
+      <div class="card">
+        <img src="assets/danau-toba.jpg">
+        <div class="label">Danau Toba</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/bukit-lawang.jpg">
+        <div class="label">Bukit Lawang</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/sipiso-piso.jpg">
+        <div class="label">Sipiso-piso</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/pulau-nias.jpg">
+        <div class="label">Pulau Nias</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/pantai-sorake.jpg">
+        <div class="label">Pantai Sorake</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/danau-linting.jpg">
+        <div class="label">Danau Linting</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/danau-siasis.jpg">
+        <div class="label">Danau Siais</div>
+      </div>
+
+      <div class="card">
+        <img src="assets/bukit-sibeabea.jpg">
+        <div class="label">Bukit Sibea-bea</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="promo" class="promo-section">
+
+    <h2>🔥 Promo & Event Wisata Sumatera Utara</h2>
+
+    <p class="promo-subtitle">
+        Informasi promo tiket dan event wisata terbaru di Sumatera Utara.
+    </p>
+
+    <div class="promo-container">
+
+        <div class="promo-card">
+            <span class="promo-badge">PROMO</span>
+            <h3>Danau Toba</h3>
+            <p>Diskon tiket masuk hingga 20% selama musim liburan.</p>
+        </div>
+
+        <div class="promo-card">
+            <span class="promo-badge event">EVENT</span>
+            <h3>Festival Danau Toba</h3>
+            <p>Festival budaya dan pertunjukan seni tahunan Sumatera Utara.</p>
+        </div>
+
+        <div class="promo-card">
+            <span class="promo-badge">PROMO</span>
+            <h3>Bukit Sibea-bea</h3>
+            <p>Paket wisata keluarga mulai dari Rp50.000.</p>
+        </div>
+
+        <div class="promo-card">
+            <span class="promo-badge event">EVENT</span>
+            <h3>Kompetisi Surfing Nias</h3>
+            <p>Ajang surfing internasional di Pantai Sorake.</p>
+        </div>
+
+    </div>
+
+</section>
+
+  <!-- POPUP -->
+  <div id="mapPopup" class="map-popup">
+
+    <div class="map-content">
+
+      <button id="closeMap">
+✕
+</button>
+
+      <h2 id="popupTitle"></h2>
+
+      <p id="popupDesc"></p>
+      <img id="popupImage" class="popup-image">
+
+      <div id="popupInfo"></div>
+
+      <div id="popupDistance"></div>
+
+
+<div id="popupMap"></div>
+
+<button id="startNav">
+  ▶ Mulai Perjalanan
+</button>
+
+<button id="shareBtn">
+  🔗 Bagikan Lokasi
+</button>
+
+<button id="favBtn">
+  ❤️ Simpan Favorit
+</button>
+
+    </div>
+
+  </div>
+
+<section class="favorit-section">
+
+  <h2>❤️ Wisata Favorit</h2>
+
+  <div id="favoriteList">
+
+    <p class="empty-favorite">
+      Belum ada wisata favorit
+    </p>
+
+  </div>
+
+</section>
+
+<section id="kontak" class="kontak-section">
+
+    <h2>📞 Pusat Informasi Wisata</h2>
+
+    <p class="kontak-subtitle">
+        Hubungi kami untuk mendapatkan informasi wisata Sumatera Utara.
+    </p>
+
+    <div class="kontak-grid">
+
+        <div class="kontak-card">
+            <h3>📍 Alamat</h3>
+            <p>
+                Dinas Pariwisata Sumatera Utara<br>
+                Kota Medan
+            </p>
+        </div>
+
+        <div class="kontak-card">
+            <h3>☎ Telepon</h3>
+            <p>(061) 12345678</p>
+        </div>
+
+        <div class="kontak-card">
+            <h3>📧 Email</h3>
+            <p>info@sigsumut.id</p>
+        </div>
+
+        <div class="kontak-card">
+            <h3>🌐 Media Sosial</h3>
+            <p>@sigsumut</p>
+        </div>
+
+    </div>
+
+    <div class="kontak-map">
+
+        <h3>🗺️ Lokasi Kantor</h3>
+
+        <iframe
+            src="https://maps.google.com/maps?q=medan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            loading="lazy">
+        </iframe>
+
+    </div>
+
+    <div class="kontak-form">
+
+        <h3>✉️ Kirim Pesan</h3>
+
+        <input type="text" placeholder="Nama">
+
+        <input type="email" placeholder="Email">
+
+        <textarea
+        placeholder="Tulis pesan Anda...">
+        </textarea>
+
+        <button>
+            Kirim Pesan
+        </button>
+
+    </div>
+
+</section>
+
+<section id="penelitian" class="penelitian-section">
+
+  <h2>
+    Tentang Penelitian
+  </h2>
+
+  <p>
+    Sistem Informasi Geografis (SIG) Berbasis Web Untuk Pemetaan Wisata Alam Sumatera Utara.
+  </p>
+
+  <h3>
+    Metode Penelitian
+  </h3>
+
+  <p>
+    Metode yang digunakan adalah Waterfall yang terdiri dari Analisis Kebutuhan, Perancangan Sistem, Implementasi, Pengujian, dan Pemeliharaan.
+  </p>
+
+  <h3>
+    Teknologi
+  </h3>
+
+  <ul>
+
+    <li>HTML5</li>
+
+    <li>CSS3</li>
+
+    <li>JavaScript</li>
+
+    <li>Leaflet JS</li>
+
+    <li>OpenStreetMap</li>
+
+    <li>Leaflet Routing Machine</li>
+
+  </ul>
+
+  <h3>
+    Tujuan
+  </h3>
+
+  <p>
+    Membantu wisatawan memperoleh informasi lokasi wisata alam Sumatera Utara secara interaktif, lengkap, dan berbasis geografis.
+  </p>
+
+</section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 SIG Wisata Sumatera Utara</p>
+  </footer>
+
+<!-- LOGIN MODAL -->
+
+<div id="loginModal" class="login-modal">
+
+  <div class="login-box">
+
+    <span id="closeLogin">&times;</span>
+
+    <h2>🔐 Login Admin</h2>
+
+    <p>Masuk untuk mengelola data wisata.</p>
+
+    <input
+      type="text"
+      id="username"
+      placeholder="Username"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
+
+    <button id="loginBtn">
+      Masuk
+    </button>
+
+  </div>
+
+</div>
+
+  <!-- JS -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>

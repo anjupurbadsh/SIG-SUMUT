@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Admin SIG SUMUT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+.sidebar{
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:250px;
+height:100vh;
+
+background:#2b7cff;
+
+padding:20px;
+
+color:white;
+
+}
+
+.sidebar h2{
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+margin:15px 0;
+cursor:pointer;
+}
+
+.main{
+
+margin-left:250px;
+padding:30px;
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.card h3{
+color:#2b7cff;
+}
+
+.table-box{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+margin-top:20px;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+th,td{
+
+padding:12px;
+border-bottom:1px solid #ddd;
+
+}
+
+button{
+
+padding:10px 15px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+color:white;
+
+}
+
+.btn-add{
+background:#2ecc71;
+}
+
+.btn-edit{
+background:#f39c12;
+}
+
+.btn-delete{
+background:#e74c3c;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>SIG SUMUT</h2>
+
+<ul>
+<li>📊 Dashboard</li>
+<li>🏞 Destinasi</li>
+<li>🎉 Promo</li>
+<li>📨 Pesan</li>
+<li onclick="logout()">🚪 Logout</li>
+</ul>
+
+</div>
+
+<div class="main">
+
+<h1>Dashboard Admin</h1>
+
+<br>
+
+<div class="cards">
+
+<div class="card">
+<h3>8</h3>
+<p>Total Destinasi</p>
+</div>
+
+<div class="card">
+<h3>4</h3>
+<p>Total Promo</p>
+</div>
+
+<div class="card">
+<h3 id="favCount">0</h3>
+<p>Total Favorit</p>
+</div>
+
+</div>
+
+<div class="table-box">
+
+<h2>Kelola Destinasi</h2>
+
+<br>
+
+<button class="btn-add">
+Tambah Destinasi
+</button>
+
+<br><br>
+
+<table>
+
+<tr>
+<th>Nama Wisata</th>
+<th>Kategori</th>
+<th>Aksi</th>
+</tr>
+
+<tr>
+<td>Danau Toba</td>
+<td>Danau</td>
+<td>
+<button class="btn-edit">Edit</button>
+<button class="btn-delete">Hapus</button>
+</td>
+</tr>
+
+<tr>
+<td>Bukit Lawang</td>
+<td>Hutan</td>
+<td>
+<button class="btn-edit">Edit</button>
+<button class="btn-delete">Hapus</button>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const favorit =
+JSON.parse(
+localStorage.getItem("favorit")
+) || [];
+
+document.getElementById(
+"favCount"
+).innerText = favorit.length;
+
+function logout(){
+
+if(confirm("Yakin logout?")){
+
+window.location.href =
+"index.html";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
